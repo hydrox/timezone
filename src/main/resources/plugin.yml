@@ -5,4 +5,4 @@ commands:
     timezone:
         description: shows and converts timezones
         usage: /<command>
-        aliases: [tz]
+        aliases: [tz, clock]
