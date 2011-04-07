@@ -3,6 +3,7 @@ package de.hydrox.timezone;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -19,24 +20,21 @@ public class Timezone extends JavaPlugin {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if (args.length >= 3) {
+		if (args.length >= 1) {
+			Date date = new Date();
 			DateFormat df = DateFormat.getDateInstance();
-			try {
-				df.setTimeZone(TimeZone.getTimeZone(args[0]));
-				df.parse(args[2] + ", " + args[0]);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			df.setTimeZone(TimeZone.getTimeZone(args[0]));
+
 			DateFormat serverFormat = new SimpleDateFormat();
 			DateFormat firstFormat = new SimpleDateFormat();
 
 			TimeZone zone = TimeZone.getTimeZone(args[0]);
-			sender.sendMessage("Servertime:" + serverFormat.format(df));
+			sender.sendMessage("Servertime: " + serverFormat.format(date));
 			
 			for (String string : args) {
 				zone = TimeZone.getTimeZone(string);
 				firstFormat.setTimeZone(zone);
-				sender.sendMessage("-->"+string+": " + firstFormat.format(df));
+				sender.sendMessage("-->"+string+": " + firstFormat.format(date));
 			}
 			return true;
 		}
