@@ -49,7 +49,6 @@ public class Timezone extends JavaPlugin {
 				return true;
 			}
 			zone = TimeZone.getTimeZone(args[0]);
-			sender.sendMessage("Servertime: " + serverFormat.format(date));
 			
 			for (String string : args) {
 				zone = TimeZone.getTimeZone(string);
