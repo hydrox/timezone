@@ -1,7 +1,6 @@
 package de.hydrox.timezone;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -34,8 +33,6 @@ public class Timezone extends JavaPlugin {
 				return true;
 			}
 			Date date = new Date();
-			DateFormat df = DateFormat.getDateInstance();
-			df.setTimeZone(TimeZone.getTimeZone(args[0]));
 
 			DateFormat serverFormat = new SimpleDateFormat();
 			DateFormat firstFormat = new SimpleDateFormat();

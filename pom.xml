@@ -2,11 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.hydrox</groupId>
   <artifactId>Timezone</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <name>Timezone</name>
   <url></url>
   <dependencies>
-    <!-- You don't necessarily need to depend on Permissions if you don't want to, but this is how you add a dependency -->
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
