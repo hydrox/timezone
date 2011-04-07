@@ -21,6 +21,11 @@ public class Timezone extends JavaPlugin {
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		if (args.length >= 1) {
+			if (args[0].toLowerCase().equals("list")) {
+				sender.sendMessage("Here is a list of valid Timezones (not complete):");
+				sender.sendMessage("GMT, GMT+1, GMT-5, PST, AET, Australia/Sydney, CST, EST, CET");
+				return true;
+			}
 			Date date = new Date();
 			DateFormat df = DateFormat.getDateInstance();
 			df.setTimeZone(TimeZone.getTimeZone(args[0]));

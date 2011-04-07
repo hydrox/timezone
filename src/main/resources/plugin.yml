@@ -4,5 +4,5 @@ version: 0.0.1
 commands:
     timezone:
         description: shows and converts timezones
-        usage: /<command> [timezone]
+        usage: /<command>
         aliases: [tz]
