@@ -1,0 +1,8 @@
+name: Timezone
+main: de.hydrox.timezone.Timezone
+version: 0.1.0
+commands:
+    timezone:
+        description: shows and converts timezones
+        usage: /<command>
+        aliases: [tz]
