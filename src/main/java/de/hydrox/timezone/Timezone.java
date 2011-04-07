@@ -19,8 +19,24 @@ public class Timezone extends JavaPlugin {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+		Date date = new Date();
+
+		DateFormat serverFormat = new SimpleDateFormat();
+		DateFormat firstFormat = new SimpleDateFormat();
+
+		sender.sendMessage("Servertime: " + serverFormat.format(date));
+		TimeZone zone = null;
+
+
 		if (args.length == 0) {
-			displayHelp(sender);
+			zone = TimeZone.getTimeZone("GMT");
+			firstFormat.setTimeZone(zone);
+			sender.sendMessage("GMT: " + firstFormat.format(date));
+
+			zone = TimeZone.getTimeZone("AET");
+			firstFormat.setTimeZone(zone);
+			sender.sendMessage("Sydney: " + firstFormat.format(date));
+
 			return true;
 		}
 		if (args.length >= 1) {
@@ -32,12 +48,7 @@ public class Timezone extends JavaPlugin {
 				displayHelp(sender);
 				return true;
 			}
-			Date date = new Date();
-
-			DateFormat serverFormat = new SimpleDateFormat();
-			DateFormat firstFormat = new SimpleDateFormat();
-
-			TimeZone zone = TimeZone.getTimeZone(args[0]);
+			zone = TimeZone.getTimeZone(args[0]);
 			sender.sendMessage("Servertime: " + serverFormat.format(date));
 			
 			for (String string : args) {
