@@ -20,10 +20,17 @@ public class Timezone extends JavaPlugin {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+		if (args.length == 0) {
+			displayHelp(sender);
+			return true;
+		}
 		if (args.length >= 1) {
 			if (args[0].toLowerCase().equals("list")) {
-				sender.sendMessage("Here is a list of valid Timezones (not complete):");
-				sender.sendMessage("GMT, GMT+1, GMT-5, PST, AET, Australia/Sydney, CST, EST, CET");
+				listTimezones(sender);
+				return true;
+			}
+			if (args[0].toLowerCase().equals("help")) {
+				displayHelp(sender);
 				return true;
 			}
 			Date date = new Date();
@@ -50,4 +57,15 @@ public class Timezone extends JavaPlugin {
 		log.info("[Timezone] Timezone unloaded");
 	}
 
+	private void listTimezones(CommandSender sender) {
+		sender.sendMessage("Here is a list of valid Timezones (not complete):");
+		sender.sendMessage("GMT, GMT+1, GMT-5, PST, AET, Australia/Sydney, CST, EST, CET");
+	}
+
+	private void displayHelp(CommandSender sender) {
+		sender.sendMessage("Type '/tz' or '/tz help' to display this help");
+		sender.sendMessage("Type '/tz list' for a (non complete) list of valid timezones");
+		sender.sendMessage("Type '/tz timezone1 [timezone2]' to show the servertime and the times in the given zones");
+		sender.sendMessage("You can display multiple timezones at once");
+	}
 }
