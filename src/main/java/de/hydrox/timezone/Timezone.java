@@ -1,6 +1,7 @@
 package de.hydrox.timezone;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -17,7 +18,7 @@ public class Timezone extends JavaPlugin {
 	public void onEnable() {
 		log.info("[Timezone] Timezone loaded");
 	}
-	
+
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		Date date = new Date();
 
@@ -48,8 +49,35 @@ public class Timezone extends JavaPlugin {
 				displayHelp(sender);
 				return true;
 			}
+			if (args[0].toLowerCase().equals("convert")) {
+				String parsedString = null;
+				try {
+					parsedString = parseDate(args);
+			        DateFormat format =
+			            DateFormat.getTimeInstance(DateFormat.SHORT);
+					Date parsedDate = format.parse(parsedString);
+					sender.sendMessage("Original string: " + parsedString);
+					String[] tmp = serverFormat.format(parsedDate).split(" ");
+					sender.sendMessage("Server: " + tmp[1] + tmp[2]);
+
+					zone = TimeZone.getTimeZone("GMT");
+					firstFormat.setTimeZone(zone);
+					tmp = firstFormat.format(parsedDate).split(" ");
+					sender.sendMessage("GMT: " + tmp[1] + tmp[2]);
+
+					zone = TimeZone.getTimeZone("AET");
+					firstFormat.setTimeZone(zone);
+					tmp = firstFormat.format(parsedDate).split(" ");
+					sender.sendMessage("Sydney: " + tmp[1] + tmp[2]);
+
+				}
+				catch(ParseException pe) {
+				}
+				return true;
+			}
+
 			zone = TimeZone.getTimeZone(args[0]);
-			
+
 			for (String string : args) {
 				zone = TimeZone.getTimeZone(string);
 				firstFormat.setTimeZone(zone);
@@ -74,5 +102,9 @@ public class Timezone extends JavaPlugin {
 		sender.sendMessage("Type '/tz list' for a (non complete) list of valid timezones");
 		sender.sendMessage("Type '/tz timezone1 [timezone2]' to show the servertime and the times in the given zones");
 		sender.sendMessage("You can display multiple timezones at once");
+	}
+
+	private String parseDate(String [] args) {
+		return  args[1] + " " + args[2];
 	}
 }
